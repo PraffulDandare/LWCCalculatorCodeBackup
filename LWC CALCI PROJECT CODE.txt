@@ -1,0 +1,68 @@
+
+html 
+
+<template>
+    <lightning-card title="Calculator" >
+        <lightning-input type="Number" label="First Number" name="aval" onchange={callme} ></lightning-input>
+        <lightning-input type="Number" label="Second Number" name="bval" onchange={callme} ></lightning-input>
+
+        <lightning-button label="Add" onclick={add}></lightning-button>
+        <lightning-button label="Subtract" onclick={sub}></lightning-button>
+        <lightning-button label="Multiply" onclick={mul}></lightning-button>
+        <p></p>
+        <p></p>
+        Result : {resvalue}
+    </lightning-card>
+</template>
+
+js
+
+
+import { LightningElement, track } from 'lwc';
+
+export default class Lwccalculator extends LightningElement {
+    @track resvalue;
+    num1;
+    num2;
+
+    callme(event){
+        const evtname = event.target.name; // where change event has occured
+        if(evtname=='aval') {  // if the name id is aval
+this.num1 = event.target.value  // assigning the aval value to num1
+        }
+        else {
+            this.num2 = event.target.value // assigning the aval to num2
+        }
+    }
+    add(){
+        const a = parseInt(this.num1);
+        const b = parseInt(this.num2);
+        this.resvalue='Addition of given Numbers =' + (a+b);
+    }
+    sub(){
+        const a = parseInt(this.num1);
+        const b = parseInt(this.num2);
+        this.resvalue='Substraction of given Numbers ='+ (a-b);
+    }
+    mul(){
+        const a = parseInt(this.num1);
+        const b = parseInt(this.num2);
+        this.resvalue='Multiplication of given Number ='+ (a*b);
+    }
+
+        
+    }
+}
+
+meta
+
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>54.0</apiVersion>
+    <isExposed>true</isExposed>
+    
+    <targets>
+    <target>lightning__RecordPage</target>
+    </targets>
+
+</LightningComponentBundle>
